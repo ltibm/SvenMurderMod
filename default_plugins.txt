@@ -1,0 +1,21 @@
+//========================================
+//
+//	This file lists all plugins that are loaded by the game
+//	Plugins use Angelscript
+//
+//========================================
+"plugins"
+{
+	"plugin"
+	{
+		"name" "CSKnife Modded"
+		"script" "lt_csknife_modded"
+		"concommandns" "lt"
+	}
+	"plugin"
+	{
+		"name" "Lt - Murder Mode Beta"
+		"script" "lt_murder"
+		"concommandns" "lt"
+	}
+}
