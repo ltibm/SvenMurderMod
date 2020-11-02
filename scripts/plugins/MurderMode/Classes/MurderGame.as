@@ -98,8 +98,6 @@ final class MurderGame : GameType
 		g_Game.PrecacheGeneric( "sound/" + MurderGameAction::MusicSheriffWin );
 		g_Game.PrecacheGeneric( "sound/" + MurderGameAction::MusicBonusTheme );
 		g_SoundSystem.PrecacheSound(MurderGameAction::MusicBonusTheme);	
-		g_ConCommandSystem.ServerCommand(".knife_default_give 4");
-		g_ConCommandSystem.ServerCommand(".knife_allow_throw 1");
 		
 	}
 	void MapActivate()
