@@ -193,11 +193,11 @@ final class MurderGame : GameType
 			{
 				if(newdamage < 50)
 				{
-					newdamage *= 2.5;
+					newdamage *= 3.35;
 				}
 				else
 				{
-					newdamage *= 2;
+					newdamage *= 2.6;
 				}
 			}
 		}
@@ -464,6 +464,7 @@ final class MurderGame : GameType
 			g_PlayerFuncs.RespawnPlayer(@cPlayer, true, true);
 		}
 		this.MurderKillerData.SetLastKilledTime(@cPlayer, 0);
+		this.MurderKillerData.SetLastKilledKillerTime(@cPlayer, -1);
 		SetRandomGlow(@cPlayer);
 	}
 	void SetRandomGlow(CBasePlayer@ cPlayer)
@@ -488,7 +489,7 @@ final class MurderGame : GameType
 			{
 				if(cPlayer.pev.targetname == "killer")
 				{
-					cPlayer.GiveNamedItem("weapon_rpg", 10);
+					cPlayer.GiveNamedItem("weapon_rpg", 0, 10);
 				}
 				cPlayer.pev.armorvalue = 100;
 			}
@@ -727,7 +728,9 @@ final class MurderGame : GameType
 				}
 				else if(pPlayer.pev.targetname == "killer" && realAttacker.pev.targetname == "killer")
 				{
-					ClientPrintAllML("MURDER_KILLER_BY_KILLER", {pPlayer.pev.netname});
+					ClientPrintAllML("MURDER_KILLER_BY_KILLER", {pPlayer.pev.netname, realAttacker.pev.netname});
+					this.MurderKillerData.SetLastKilledKillerTime(@realAttacker,g_Engine.time);
+					
 				}
 				else if(pPlayer.pev.targetname == "sheriff" && realAttacker.pev.targetname == "killer")
 				{

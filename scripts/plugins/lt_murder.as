@@ -167,6 +167,10 @@ abstract class GameType : XPHookBinderBase
 	{
 		return false;
 	}
+	bool IsBonusRound()
+	{
+		return false;
+	}
 	bool InRound()
 	{
 		return false;

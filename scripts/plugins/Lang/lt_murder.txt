@@ -21,9 +21,10 @@ MURDER_ROUND_START_FAIL = Not enaugh player count to start round.
 MURDER_CIVIL_BY_KILLER = '{0}' killed by killer.
 MURDER_CIVIL_BY_SHERIFF = '{0}', killed by Sheriff '{1}'.
 MURDER_KILLER_BY_SHERIFF = Killer '{0}', killed by Sheriff.
-MURDER_KILLER_BY_KILLER = Killer, killed by killer
+MURDER_KILLER_BY_KILLER = Killer '{0}', killed by killer '{1}'
 MURDER_SHERIFF_BY_KILLER = Sheriff '{0}', killed by killer
 MURDER_BONUS_ROUND = Bonus Round
+MURDER_KILLER_SPEED_REDUCED = Your speed fixed in {0} sec
 
 [TR]
 MURDER_KILLER = Katil
@@ -48,6 +49,7 @@ MURDER_ROUND_START_FAIL = Round baslamasi icin yeterli oyuncu yok.
 MURDER_CIVIL_BY_KILLER = '{0}', Katil tarafindan olduruldu.
 MURDER_CIVIL_BY_SHERIFF = '{0}', Serif '{1}' tarafindan olduruldu.
 MURDER_KILLER_BY_SHERIFF = Katil '{0}', Serif tarafindan olduruldu.
-MURDER_KILLER_BY_KILLER = Katil '{0}', katil tarafindan olduruldu.
+MURDER_KILLER_BY_KILLER = Katil '{0}', katil '{1}' tarafindan olduruldu.
 MURDER_SHERIFF_BY_KILLER = Serif '{0}', katil tarafindan olduruldu.
 MURDER_BONUS_ROUND = Bonus El
+MURDER_KILLER_SPEED_REDUCED = Hiziniz {0} sn icerisinde duzeltilecek

@@ -137,8 +137,11 @@ class weapon_csknifem : ScriptBasePlayerWeaponEntity
 			{
 				bResult = self.DefaultDeploy( self.GetV_Model( this.GetVModel() ), self.GetP_Model( "models/cs16/csknife/p_knife.mdl" ), KNIFE_DRAW, "crowbar" );
 			}
-			float deployTime = 1;
-			self.m_flTimeWeaponIdle = self.m_flNextPrimaryAttack = self.m_flNextSecondaryAttack = g_Engine.time + deployTime;
+			float deployTime = 0.25;
+			if(self.m_flNextPrimaryAttack <= g_Engine.time)
+			{
+				self.m_flTimeWeaponIdle = self.m_flNextPrimaryAttack = self.m_flNextSecondaryAttack = g_Engine.time + deployTime;
+			}
 			g_SoundSystem.EmitSound( m_pPlayer.edict(), CHAN_WEAPON, "weapons/cs16/knife_deploy1.wav", 1, ATTN_NORM );
 			return bResult;
 		}
@@ -186,7 +189,7 @@ class weapon_csknifem : ScriptBasePlayerWeaponEntity
 	{
 		g_EntityFuncs.SetModel( self, "models/invisible.mdl" );
 		m_pPlayer.pev.viewmodel = "models/invisible.mdl";
-		self.pev.nextthink = g_Engine.time + 3.60;
+		self.pev.nextthink = g_Engine.time + 2.70;
 		SetThink( ThinkFunction( this.ModelThink ) );
 	}
 	void ModelThink()
@@ -293,7 +296,7 @@ class weapon_csknifem : ScriptBasePlayerWeaponEntity
 			m_pPlayer.SetAnimation( PLAYER_ATTACK1 ); 
 
 			// AdamR: Custom damage option
-			float flDamage = 70;
+			float flDamage = 80;
 			if ( self.m_flCustomDmg > 0 )
 				flDamage = self.m_flCustomDmg;
 			// AdamR: End
@@ -441,7 +444,7 @@ class weapon_csknifem : ScriptBasePlayerWeaponEntity
 			m_pPlayer.SetAnimation( PLAYER_ATTACK1 ); 
 
 			// AdamR: Custom damage option
-			float flDamage = 30;
+			float flDamage = 40;
 			if ( self.m_flCustomDmg > 0 )
 				flDamage = self.m_flCustomDmg;
 			// AdamR: End

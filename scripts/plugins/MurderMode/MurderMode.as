@@ -27,6 +27,7 @@ namespace MurderGameCvar
 	CCVar@ RoundTime;
 	CCVar@ RoundWaitTime;
 	CCVar@ BonusEnabled;
+	CCVar@ Killer_SpeedFixedTime;
 	void Register()
 	{
 		if(cvarRegistered) return;
@@ -35,6 +36,7 @@ namespace MurderGameCvar
 		@RoundTime = @CCVar("murdermode_round_time", 180.0, "0: Infinite", ConCommandFlag::AdminOnly); 
 		@RoundWaitTime = @CCVar("murdermode_round_wait_time", 15.0, "Minimum 3", ConCommandFlag::AdminOnly); 
 		@BonusEnabled = @CCVar("murdermode_bonus_enabled", 1, "Enable bonus map", ConCommandFlag::AdminOnly); 
+		@Killer_SpeedFixedTime = @CCVar("murdermode_killer_slowspeed_time", 10, "Set killer speed slowly killing killer", ConCommandFlag::AdminOnly); 
 		cvarRegistered = true;
 	}
 }
@@ -42,7 +44,8 @@ namespace MurderGameAction
 {
 	array<string> MusicThemes = 
 	{
-		"misc/xpss/murder_theme.mp3"
+		"misc/xpss/murder_theme.mp3",
+		"misc/xpss/murder_wup.mp3"
 	};
 	const string MusicBonusTheme = "misc/xpss/murder_bonus.mp3";
 	const string MusicKillerWin = "misc/xpss/killer_win.mp3";
@@ -228,6 +231,7 @@ namespace MurderGameMessage
 		float lastkilled = game.MurderKillerData.GetLastKilledTime(@cPlayer);
 		string extraMsg = "";
 		float smokeTime = MurderGameCvar::Killer_SmokeTime.GetFloat();
+		float slowTime = MurderGameCvar::Killer_SpeedFixedTime.GetFloat();
 		if(smokeTime > 0)
 		{
 			if(g_Engine.time > lastkilled + smokeTime)
@@ -238,6 +242,18 @@ namespace MurderGameMessage
 			{
 				int leftSec = int((lastkilled + smokeTime) - g_Engine.time);
 				extraMsg = "\r\n" + MLText(@cPlayer, "MURDER_HUD_KILLER_SMOKE_REMAIN", {leftSec});
+			}
+		}
+		if(slowTime > 0)
+		{
+			float lastkilledkiller = game.MurderKillerData.GetLastKilledKillerTime(@cPlayer);
+			if(lastkilledkiller >= 0)
+			{
+				if(g_Engine.time < lastkilledkiller + slowTime)
+				{
+					int leftSec = int((lastkilledkiller + slowTime) - g_Engine.time);
+					extraMsg += "\r\n" + MLText(@cPlayer, "MURDER_KILLER_SPEED_REDUCED", {leftSec});
+				}
 			}
 		}
 		string message = "\r\n" + MLText(@cPlayer, "MURDER_HUD_KILLER") + extraMsg;

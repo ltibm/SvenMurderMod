@@ -28,12 +28,26 @@ class MurderGeneralEntity : MurderEntityBase
 
 		}
 		float maxspeed = 270.0;
+		MurderGame@ game = cast<MurderGame@>(@g_CurrentGame);
 		if(cPlayer.pev.targetname == "killer")
 		{
+			float slowTime = MurderGameCvar::Killer_SpeedFixedTime.GetFloat();
 			if(cPlayer.pev.button & IN_RELOAD > 0)
 			{
 				maxspeed = 370;
 			}
+			if(slowTime > 0)
+			{
+				float lastkilledkiller = game.MurderKillerData.GetLastKilledKillerTime(@cPlayer);
+				if(lastkilledkiller >= 0)
+				{
+					if(g_Engine.time < lastkilledkiller + slowTime)
+					{
+						maxspeed = 180;
+					}
+				}
+			}
+
 		}
 		if(cPlayer.pev.targetname == "sheriff" && cPlayer.IsAlive())
 		{
@@ -52,7 +66,7 @@ class MurderGeneralEntity : MurderEntityBase
 			}
 		}
 		if(cPlayer.pev.maxspeed != maxspeed) cPlayer.pev.maxspeed = maxspeed;
-		MurderGame@ game = cast<MurderGame@>(@g_CurrentGame);
+
 		int index = game.MurderGeneralData.GetUserDataInt(@cPlayer, "glow_color_index", 0);
 		Vector color = MurderGameAction::playerGlows[index];
 		EntityActions::SetRendering(@cPlayer, kRenderFxGlowShell, color.x, color.y, color.z, kRenderNormal, 25);
