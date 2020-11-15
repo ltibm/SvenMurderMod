@@ -43,7 +43,7 @@ class KnifeProjectileEntity : ScriptBaseEntity
 				self.pev.velocity = Vector(0, 0, 0);
 				g_SoundSystem.EmitSound( pOther.edict(), CHAN_WEAPON, "weapons/cs16/knife_hit4.wav", 1, ATTN_NORM );
 				
-				pOther.TakeDamage( @self.pev, @this.originalOwner.pev, 50, DMG_SLASH );
+				pOther.TakeDamage( @self.pev, @this.originalOwner.pev, 60, DMG_SLASH );
 				this.SetThink( ThinkFunction(this.Remove) );
 			}
 		}
