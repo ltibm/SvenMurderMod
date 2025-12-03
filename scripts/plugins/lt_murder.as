@@ -72,7 +72,7 @@ void MapActivate()
 		g_CurrentGame.MapActivate();
 	}
 }
-HookReturnCode MapChange()
+HookReturnCode MapChange(const string& in szNextMap)
 {
 	if(g_HookEngine !is null)
 	{
