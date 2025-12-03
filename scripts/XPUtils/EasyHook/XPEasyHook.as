@@ -263,7 +263,7 @@ mixin class XPEasyHook : IEasyHookRegisters
 		}	
 		return HOOK_CONTINUE;
 	}
-	HookReturnCode MapChange()
+	HookReturnCode MapChange(const string& in szNextMap)
 	{
 		if(this.BindingsEnabled())
 		{
@@ -272,7 +272,7 @@ mixin class XPEasyHook : IEasyHookRegisters
 				auto binder = @this.bindings[i];
 				if(this.CheckIsRemove(@binder, i, i)) continue;
 				if(!this.BinderValid(@binder) || !this.BinderPreCalled(@binder, "MapChange", i)) continue;
-				binder.MapChange();
+				binder.MapChange(szNextMap);
 				this.BinderPostCalled(@binder, "MapChange");
 			}
 		}	
