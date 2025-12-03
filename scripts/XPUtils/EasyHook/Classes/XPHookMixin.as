@@ -38,7 +38,7 @@ mixin class XPHookMixin : IEasyHookRegisters
 	{		
 		return HOOK_CONTINUE;
 	}
-	HookReturnCode MapChange()
+	HookReturnCode MapChange(const string& in szNextMap)
 	{
 		return HOOK_CONTINUE;
 	}
