@@ -9,7 +9,7 @@ interface IEasyHookRegisters
 	HookReturnCode ClientPutInServer(CBasePlayer@);
 	HookReturnCode ClientDisconnect(CBasePlayer@);
 	HookReturnCode ClientSay(SayParameters@);
-	HookReturnCode MapChange();
+	HookReturnCode MapChange(const string& in szNextMap);
 	HookReturnCode EntityCreated(CBaseEntity@);
 	HookReturnCode PlayerSpawn(CBasePlayer@);
 	HookReturnCode PlayerCanRespawn(CBasePlayer@, bool& out);
