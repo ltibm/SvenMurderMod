@@ -76,7 +76,7 @@ HookReturnCode MapChange(const string& in szNextMap)
 {
 	if(g_HookEngine !is null)
 	{
-		g_HookEngine.MapChange();
+		g_HookEngine.MapChange(szNextMap);
 	}
 	PluginExit();
 	return HOOK_CONTINUE;
